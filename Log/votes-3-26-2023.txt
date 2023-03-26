@@ -1,4 +1,4 @@
-start: 1:48 PM
+start: 1:48 AM
 congress.gov api: https://api.congress.gov/sign-up/
 api key (acquired for XXXXXXXXX@XXXXXXXXXXXXXXXXXXXX, only for my use apparently): XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 congress.gov api help page: https://www.congress.gov/help/using-data-offsite
@@ -16,3 +16,7 @@ however, for each item returned by the request, it seems possible to plainly req
 the data provided may be used in the following format to make a raw text request for each committee report:
 https://www.congress.gov/[CONGRESS NUMBER]/crpt/hrpt[REPORT NUMBER]/generated/CRPT-[CONGRESS NUMBER]hrpt[REPORT NUMBER].htm
 curl requests to download that text are probably not rate limited by the API, because they do not use it
+tasks which can be completed using this api are:
+>identification of all committee reports
+then all the reports may be downloaded using curl requests, stored, and later parsed
+end: 2:40 AM
