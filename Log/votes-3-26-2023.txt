@@ -1,6 +1,6 @@
 start: 1:48 PM
 congress.gov api: https://api.congress.gov/sign-up/
-api key (acquired for scapper@u.rochester.edu, only for my use apparently): XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+api key (acquired for XXXXXXXXX@XXXXXXXXXXXXXXXXXXXX, only for my use apparently): XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 congress.gov api help page: https://www.congress.gov/help/using-data-offsite
 according to https://github.com/LibraryOfCongress/api.congress.gov:
 rate limit for requests is 1000/hr
