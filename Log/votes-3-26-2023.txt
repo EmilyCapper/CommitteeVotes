@@ -1,14 +1,18 @@
 start: 1:48 PM
 congress.gov api: https://api.congress.gov/sign-up/
-api key (acquired for scapper@u.rochester.edu, only for my use apparently): 69wXSbcvubLaLduuP6akPnPfNwZtYiGS6q8wErkX
+api key (acquired for scapper@u.rochester.edu, only for my use apparently): XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 congress.gov api help page: https://www.congress.gov/help/using-data-offsite
 according to https://github.com/LibraryOfCongress/api.congress.gov:
 rate limit for requests is 1000/hr
 api returns first 20 results, up to 250, and then no more
 congress.gov github documentation: https://github.com/LibraryOfCongress/api.congress.gov/tree/main/Documentation
 committee report endpoint: https://github.com/LibraryOfCongress/api.congress.gov/blob/main/Documentation/CommitteeReportEndpoint.md
-
-
-
-
-
+committee report request format from https://api.congress.gov/#/committee-report/committee_reports:
+https://api.congress.gov/v3/committee-report/[CONGRESS NUMBER]/hrpt?format=json&offset=0&limit=250&api_key=[INSERT_KEY]
+hrpt=house report, as opposed to srpt=senate report or erpt=executive report
+offset can be used to get the next 250 results after the first 250
+it appears that this specific endpoint simply returns information about committee reports available
+however, for each item returned by the request, it seems possible to plainly request each one, individually
+the data provided may be used in the following format to make a raw text request for each committee report:
+https://www.congress.gov/[CONGRESS NUMBER]/crpt/hrpt[REPORT NUMBER]/generated/CRPT-[CONGRESS NUMBER]hrpt[REPORT NUMBER].htm
+curl requests to download that text are probably not rate limited by the API, because they do not use it
