@@ -1,0 +1,14 @@
+start: 1:48 PM
+congress.gov api: https://api.congress.gov/sign-up/
+api key (acquired for scapper@u.rochester.edu, only for my use apparently): 69wXSbcvubLaLduuP6akPnPfNwZtYiGS6q8wErkX
+congress.gov api help page: https://www.congress.gov/help/using-data-offsite
+according to https://github.com/LibraryOfCongress/api.congress.gov:
+rate limit for requests is 1000/hr
+api returns first 20 results, up to 250, and then no more
+congress.gov github documentation: https://github.com/LibraryOfCongress/api.congress.gov/tree/main/Documentation
+committee report endpoint: https://github.com/LibraryOfCongress/api.congress.gov/blob/main/Documentation/CommitteeReportEndpoint.md
+
+
+
+
+
