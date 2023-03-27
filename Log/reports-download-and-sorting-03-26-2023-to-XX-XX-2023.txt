@@ -1,4 +1,4 @@
-start: 1:48 AM
+start: 1:48 AM (03/26/2023)
 congress.gov api: https://api.congress.gov/sign-up/
 api key (acquired for XXXXXXXXX@XXXXXXXXXXXXXXXXXXXX, only for my use apparently): XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 congress.gov api help page: https://www.congress.gov/help/using-data-offsite
@@ -19,9 +19,40 @@ curl requests to download that text are probably not rate limited by the API, be
 tasks which can be completed using this api are:
 >identification of all committee reports
 then all the reports may be downloaded using curl requests, stored, and later parsed
-end: 2:40 AM
-start: 12:18 AM
+end: 2:40 AM (03/26/2023)
+start: 12:18 AM (03/27/2023)
 opening download.js to start determining how to download the files
 issue with installing nodejs modules from wsl: permissions problem
 opting to simply copy nodejs modules created within wsl
 .env variables set up to mask the user token
+returned object from api contains three properties with the following useful subproperties:
+ pagination (object)
+ 	count (int)
+ reports (object list)
+ 	congress (int)
+ 	number (int)
+ 	part (int)
+it's necessary to account for reports with multiple parts, usually two, attempting to restandardize the report .htm link
+new formulation which only adds an optional bit of text towards the end of the request link:
+https://www.congress.gov/[CONGRESS NUMBER]/crpt/hrpt[REPORT NUMBER]/generated/CRPT-[CONGRESS NUMBER]hrpt[REPORT NUMBER]["-pt"][PART NUMBER].htm
+however, no page number flag should be included if there is only one part in a report
+it may also be useful to use
+https://api.congress.gov/v3/committee-report/[CONGRESS NUMBER]/HRPT/[REPORT NUMBER]?format=json&api_key=[INSERT_KEY]
+to gain more detailed information about reports, for the purposes of sorting
+after some writing and debugging, it appears that the code which fetches basic information on all house committee reports available online works
+and, in the data form it outputs, each set of data on committee reports is organized by congress number and should be sorted correctly
+the next step is to download every report
+however, we may or may not want to filter out reports which are not associated with bills, and may require specific report information data regardless
+it will be an aim to double-check whether or not this is a preference, and to use the API to access the information on the 1000s of reports available
+because the API use rate limit is 1000/hr, this means one API call every 3.6 seconds
+to avoid any slight problem with rate limits, API calls will be taken every 4 seconds instead
+with a total of 12241 committee report results, it would take just shy of 13 hours and 37 minutes (1337 lol) to complete
+this algorithm must work correctly the first or second time, and its data output, as well as the one preceeding it, should be isolated into files
+fortunately, the most recent 118th congress only has 12 existing reports, and acts as a good testing ground for such an algorithm
+each file that contains code which shall have independent outputs will be isolated too
+information1.js should be the code that fetches the basic information on all available reports
+functionality to output the result of information1.js into a file still needs to be added
+information2.js (planned) should create a new version of the output provided by information1.js
+however, it would only include reports that meet the inclusion criteria based on the fetched detailed information
+information3.js (planned) should download full text of each relevant committee report into separate folders based on the output of information2.js
+end: 2:40 AM (03/27/2023)
