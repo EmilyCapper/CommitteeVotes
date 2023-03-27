@@ -20,3 +20,8 @@ tasks which can be completed using this api are:
 >identification of all committee reports
 then all the reports may be downloaded using curl requests, stored, and later parsed
 end: 2:40 AM
+start: 12:18 AM
+opening download.js to start determining how to download the files
+issue with installing nodejs modules from wsl: permissions problem
+opting to simply copy nodejs modules created within wsl
+.env variables set up to mask the user token
