@@ -56,3 +56,15 @@ information2.js (planned) should create a new version of the output provided by 
 however, it would only include reports that meet the inclusion criteria based on the fetched detailed information
 information3.js (planned) should download full text of each relevant committee report into separate folders based on the output of information2.js
 end: 2:40 AM (03/27/2023)
+start: 7:28 PM (03/31/2023)
+added a file writing functionality for the output of information1.js
+also added an API call progress ticker for when the file is run, showing the number of results
+information1.js is complete, now working on information2.js
+after a detailed examination of the sorts of vote tabulations available or not available from each consistent committee, only a few committees seem reliable
+many committees report votes in images in PDF files, which are not able to be directly scraped for text (not at least without the use of an AI)
+some committees even seem to have mixes of image-based and text-based vote tabulation, maybe image-based in longer reports
+the most reliable committees for text vote tabulation appear to be:
+rules, transportation and infrastructure, homeland security, veterans' affairs, agriculture, ways and means, armed services, budgey, and intelligence (permanent select)
+however, the ones which are listed first have more reports
+it may be the case that upon further investigation, some committees which appeared to always only have image reporting of their votes actually had some text tabulation
+end: 9:48 PM (03/31/2023)
