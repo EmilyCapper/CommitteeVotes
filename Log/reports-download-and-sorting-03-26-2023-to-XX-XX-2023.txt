@@ -70,5 +70,8 @@ it may be the case that upon further investigation, some committees which appear
 end: 9:48 PM (03/31/2023)
 start: 1:24 AM (04/16/2023)
 wrote script to fetch detailed results from congress.gov
-expected to take >12 hours to run, so it will be left to run in the background
-end: 2:44 AM (04/16/2023)
+need to fix order of simple search results for the information2.js script to work correctly
+fixed: it previously added 250 simple search blocks in reverse block order
+another issue was caught and solved in the part catcher of information2.js
+expected to take ~13 hours to run, so it will be left to run in the background
+end: 3:04 AM (04/16/2023)

@@ -20,7 +20,7 @@ async function foo() {
             let data = await fetch( `https://api.congress.gov/v3/committee-report/${ i }/hrpt?format=json&offset=${ ticker }&limit=250&api_key=${ process.env.USER_TOKEN }` );
             data = await data.text();
             data = JSON.parse( data );
-            current_list = current_list.concat( data.reports.reverse() );
+            current_list = data.reports.reverse().concat( current_list );
             console.log( `Received.` );
             // it's not necessary to loop and make more requests if there are
             // equal to or less than 250 items returned, or if all items have

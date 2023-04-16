@@ -119,9 +119,8 @@ async function foo() {
             let data;
             // searches are only possible for a report on the whole, so copy
             // data from previous reports for a report which has multiple parts
-            if( ( ( simple_search_results[ i ].length - 1 != j ) 
-                  && simple_search_results[ i ][ j + 1 ].part > 1 )
-                || simple_search_results[ i ][ j ].part > 1 ) {
+            if( simple_search_results[ i ].length - 1 != j 
+                  &&  simple_search_results[ i ][ j ].part > 1 ) {
                 console.log( `Adding additional part...` );
                 data = simple_search_results[ i ][ j - 1 ];
                 data.part++;
