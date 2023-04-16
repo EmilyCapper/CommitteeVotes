@@ -68,3 +68,7 @@ rules, transportation and infrastructure, homeland security, veterans' affairs, 
 however, the ones which are listed first have more reports
 it may be the case that upon further investigation, some committees which appeared to always only have image reporting of their votes actually had some text tabulation
 end: 9:48 PM (03/31/2023)
+start: 1:24 AM (04/16/2023)
+wrote script to fetch detailed results from congress.gov
+expected to take >12 hours to run, so it will be left to run in the background
+end: 2:44 AM (04/16/2023)

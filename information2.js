@@ -111,13 +111,32 @@ let house_committees = [
     "Intelligence (Permanent Select) Committee"
 ]
 async function foo() {
-    let simple_search_results = await fs.readFile( "simple_search_results.json", "utf8", ( err ) => {} );
-    let data = await fetch( `https://api.congress.gov/v3/committee-report/${ 117 }/HRPT/${ 621 }?format=json&api_key=${ process.env.USER_TOKEN }` );
-    data = await data.text();
-    data = JSON.parse( data );
-    console.log( data );
-    console.log( data.committeeReports[ 0 ].associatedBill );
-    console.log( data.committeeReports[ 0 ].committees );
+    let simple_search_results = await fs.readFileSync( "simple_search_results.json", "utf8", ( err ) => {} );
+    simple_search_results = JSON.parse( simple_search_results );
+    for( let i = 0; i < simple_search_results.length; i++ ) {
+        console.log( `Processing simple results for Congress ${ simple_search_results[ i ][ 0 ].congress }` );
+        for( let j = 0; j < simple_search_results[ i ].length; j++ ) {
+            let data;
+            // searches are only possible for a report on the whole, so copy
+            // data from previous reports for a report which has multiple parts
+            if( ( ( simple_search_results[ i ].length - 1 != j ) 
+                  && simple_search_results[ i ][ j + 1 ].part > 1 )
+                || simple_search_results[ i ][ j ].part > 1 ) {
+                console.log( `Adding additional part...` );
+                data = simple_search_results[ i ][ j - 1 ];
+                data.part++;
+                data = JSON.stringify( data );
+            } else {
+                await new Promise( r => setTimeout( r, 4000 ) ); // 4 second wait time between API calls
+                console.log( `Fetching report ${ simple_search_results[ i ][ j ].number }, ${ simple_search_results[ i ].length - j + 1 } remaining...` );
+                data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
+                data = await data.text();
+            }
+            simple_search_results[ i ][ j ] = JSON.parse( data );
+        }
+    }
+    console.log( `Search complete. Writing results to file...` );
+    fs.writeFile( "detailed_search_results.json", JSON.stringify( simple_search_results ), "utf8", ( err ) => {} );
 }
 
 foo();
