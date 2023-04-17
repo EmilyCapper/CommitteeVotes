@@ -109,7 +109,8 @@ let house_committees = [
     "Budget Committee",
     "House Administration Committee",
     "Intelligence (Permanent Select) Committee"
-]
+];
+
 async function foo() {
     let simple_search_results = await fs.readFileSync( "simple_search_results.json", "utf8", ( err ) => {} );
     simple_search_results = JSON.parse( simple_search_results );
@@ -127,11 +128,20 @@ async function foo() {
                 data = JSON.stringify( data );
             } else {
                 await new Promise( r => setTimeout( r, 4000 ) ); // 4 second wait time between API calls
-                console.log( `Fetching report ${ simple_search_results[ i ][ j ].number }, ${ simple_search_results[ i ].length - j + 1 } remaining...` );
-                data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
+                console.log( `Fetching report ${ simple_search_results[ i ][ j ].number }, ${ simple_search_results[ i ].length - j - 1 } remaining...` );
+                try { // in the event of connection errors, implemented because a timeout occurred
+                    data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
+                } catch ( error ) {
+                    await new Promise( r => setTimeout( r, 60000 ) ); // wait one minute and try again
+                    data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
+                }
                 data = await data.text();
             }
-            simple_search_results[ i ][ j ] = JSON.parse( data );
+            try { // in long-term runs, an error can occur where HTML is sent instead of JSON
+                simple_search_results[ i ][ j ] = JSON.parse( data );
+            } catch ( error ) { // if this happens, try the whole request again
+                j--;
+            }
         }
     }
     console.log( `Search complete. Writing results to file...` );
