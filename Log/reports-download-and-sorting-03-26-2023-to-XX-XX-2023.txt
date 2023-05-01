@@ -75,8 +75,82 @@ fixed: it previously added 250 simple search blocks in reverse block order
 another issue was caught and solved in the part catcher of information2.js
 expected to take ~13 hours to run, so it will be left to run in the background
 end: 3:04 AM (04/16/2023)
-start: 8:50 PM
+start: 8:50 PM (04/30/2023)
 data collected inbetween, time not recorded
 trimming data in detailed_search_results.json file
 rewrite successful
 better than using a revised information2.js because this took a few seconds versus several hours
+notes copied from information2.js:
+there are 21 either mostly continuous or semicontinuous committees, but only
+the ones marked with stars (*) have reports which issue text-parsable vote
+tabulations: others may not record them (X) or have them in image format (I)
+Natural Resources Committee (I)
+Rules Committee (*)
+Judiciary Committee (I)
+Energy and Commerce Committee (I)
+Transportation and Infrastructure Committee (*)
+Homeland Security Committee (*)
+Financial Services Committee (I)
+Appropriations Committee (I)
+Education and the Workforce Committee (I)
+Science, Space, and Technology Committee (X)
+Small Business Committee (X)
+Veterans' Affairs Committee (*)
+Agriculture Committee (*)
+Oversight and Accountability Committee (X)
+Ways and Means Committee (*)
+Ethics Committee (XI)
+Foreign Affairs Committee (X)
+Armed Services Committee (*I)
+Budget Committee (*I)
+House Administration Committee (X)
+Intelligence (Permanent Select) Committee (*)
+this tabulation may not be totally accurate, and so a revision will be attempted
+the information of interest is whether or not, among a n=10 sampling of a given committee's reports, there are any text versions of votes, and then if there are any image versions of votes
+REVISED TABULATION REVISED TABULATION REVISED TABULATION REVISED TABULATION REVISED TABULATION REVISED TABULATION:
+* = text-parsable
+F = inconsistent text format
+I = image format
+X = no recording
+Natural Resources Committee ()
+Rules Committee ()
+Judiciary Committee ()
+Energy and Commerce Committee ()
+Transportation and Infrastructure Committee ()
+Homeland Security Committee ()
+Financial Services Committee ()
+Appropriations Committee ()
+Education and the Workforce Committee ()
+Science, Space, and Technology Committee ()
+Small Business Committee ()
+Veterans' Affairs Committee ()
+Agriculture Committee ()
+Oversight and Accountability Committee ()
+Ways and Means Committee ()
+Ethics Committee ()
+Foreign Affairs Committee ()
+Armed Services Committee ()
+Budget Committee (*)
+>table format, plus another table format, sometimes multiple sections of votes of the committee
+House Administration Committee (*)
+>table format, plus another table format, varying section headers
+Intelligence (Permanent Select) Committee (*F)
+>table and sentence formats, plus another obscure sentence format
+additionally, types of associated bills:
+HR: bill from house of reps
+HRES: resolution from the house of reps
+SCONRES/HCONRES: concurrent resolution taken up by house and senate, but don't become law
+SJRES/HJRES: joint resolution taken up by house and senate, and the president signs
+paused revised tabulation:
+there was a problem noticed in the search results, specifically that it does not seem to actually capture all of the correct results
+it is necessary to re-request all of the data in order to fix the issue, which is a duplication of some results without properly indicating different part numbers
+preparing to run information2.js again
+next, a download of all reports from the rules committee will be attempted and a parsing attempt will also be made to create some actual data
+it also seems like some returned results from the simple search are out of order, affecting the results of the complex search
+changing code in complex search to not depend on the previous result, and also checking if there's a way to request a specific part
+there is no way to make a specific information request about a particular part, and sometimes it returns information about the second part and not the first
+plan for next time:
+need an alternative method of determining which committee a report came from than the detailed information because it has too many problems
+try to do it using the text of the reports themselves
+change script to use the /text request instead
+end: 11:34 PM (04/30/2023)

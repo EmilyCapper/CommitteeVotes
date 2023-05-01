@@ -17,6 +17,7 @@ async function foo() {
             console.log( `> Receiving page ${ Math.floor( ticker / 250 ) + 1 } of results...` );
             // 'i' is a substitute for congress number
             // separate lines finish await calls
+            await new Promise( r => setTimeout( r, 4000 ) ); // 4 second wait time between API calls
             let data = await fetch( `https://api.congress.gov/v3/committee-report/${ i }/hrpt?format=json&offset=${ ticker }&limit=250&api_key=${ process.env.USER_TOKEN }` );
             data = await data.text();
             data = JSON.parse( data );
