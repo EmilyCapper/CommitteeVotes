@@ -136,11 +136,11 @@ async function foo() {
                     data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
                 }
                 data = await data.text();
-            }
-            try { // in long-term runs, an error can occur where HTML is sent instead of JSON
-                simple_search_results[ i ][ j ] = JSON.parse( data );
-            } catch ( error ) { // if this happens, try the whole request again
-                j--;
+                try { // in long-term runs, an error can occur where HTML is sent instead of JSON
+                    simple_search_results[ i ][ j ] = JSON.parse( data ).committeeReports[ 0 ];
+                } catch ( error ) { // if this happens, try the whole request again
+                    j--;
+                }
             }
         }
     }

@@ -75,3 +75,8 @@ fixed: it previously added 250 simple search blocks in reverse block order
 another issue was caught and solved in the part catcher of information2.js
 expected to take ~13 hours to run, so it will be left to run in the background
 end: 3:04 AM (04/16/2023)
+start: 8:50 PM
+data collected inbetween, time not recorded
+trimming data in detailed_search_results.json file
+rewrite successful
+better than using a revised information2.js because this took a few seconds versus several hours
