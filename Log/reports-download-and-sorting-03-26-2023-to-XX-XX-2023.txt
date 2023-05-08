@@ -154,3 +154,9 @@ need an alternative method of determining which committee a report came from tha
 try to do it using the text of the reports themselves
 change script to use the /text request instead
 end: 11:34 PM (04/30/2023)
+start: 10:35 AM (05/08/2023)
+manually tabulating sample data for 2009 hb 2454 report 111-137
+see votes.csv in /manual_sample_data/
+tabulation complete
+see: guide, for votes.txt to interpret votes.csv
+end: 2:05 PM (05/08/2023)

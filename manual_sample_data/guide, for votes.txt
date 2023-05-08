@@ -1,0 +1,94 @@
+each row is the single vote of an individual member on a committee about one issue of particular bill
+1. member_name
+text name of member
+2. member_code
+ICPSR ID number of member
+3. party
+ICPSR ID number of party
+100=Democrat
+200=Republican
+328=Independent
+4. made_motion
+indicates whether or not the individual motioned for a particular vote
+only indicates for the first individual
+0=no
+1=yes
+5. vote
+0=no
+1=yes
+2=present
+3=did not vote
+6. vote_num
+numerical value assigned to vote
+either taken as the roll call vote number from the report, or assigned manually in absence of a number
+7. purpose
+Reporting=vote considering reporting the bill to the floor
+Amendment=vote considering a given amendment
+8. purpose_notes
+additional information on the purpose of the vote
+includes amendment text if vote was on an amendment
+9. outcome
+0=not agreed to
+1=agreed to
+10. congress
+congress number 104-*
+11. committee
+committee name text
+12. committee_code
+ICPSR ID number of committee
+102=Agriculture
+104=Appropriations
+106=Armed Services (103rd, 109-111th)
+    National Security (104th - 108th)
+113=Banking, Finance and Urban Affairs (103rd)
+    Banking and Financial Services (104th - 106th)
+    Financial Services (106th - 111th)
+115=Budget
+120=District of Columbia (103rd)
+124=Education and Labor (103rd, 111th)
+    Economic and Educational Opportunities (104th)
+    Education and the Workplace (105th - 109th)
+128=Energy and Commerce (103rd, 107th - 111th)
+    Commerce (104th - 106th)
+134=Foreign Affairs (103rd, 110th-111th)
+    International Relations (104th - 109th)
+138=Government Operations (103rd)
+    Government Reform and Oversight (104th - 109th)
+    Oversight and Government Reform (110th-111th)
+142=House Administration (103rd, 109-111th)
+    House Oversight (104th - 108th)
+156=Judiciary
+160=Merchant Marine and Fisheries (103rd)
+164=Natural Resources (103rd, 111th)
+    Resources (104h - 109th)
+168=Post Office and Civil Service (103rd)
+173=Public Works and Transportation (103rd)
+    Transportation and Infrastructure (104th - 111th)
+176=Rules
+182=Science, Space, and Technology (103rd)
+    Science (104th - 109th)
+    Science and Technology (110th-111th)
+184=Small Business
+186=Standards of Official Conduct
+192=Veterans Affairs
+196=Ways and Means
+242=Intelligence (Select)
+251=Homeland Security (Select 107th and 108th; Standing, 109th-111th)
+252=Energy Independence and Global Warming (Select, 110th-111th)
+253=Investigate the Voting Irregularities of August 2, 2007 (Select, 110th)
+254=Events Surrounding the 2012 Terrorist Attack on Benghazi (Select, 113th-114th)
+13. report_num
+report number 1-*
+14. report_part
+report part number 1-*
+15. res_type
+HR=bill from the hosue
+HRES=resolution from the house
+HCONRES=concurrent resolution taken up by house and senate, but doesn't become law
+HJRES=joint resolution taken up by house and senate, and the president signs
+16. res_num
+resolution number 1-*
+17. res_title
+title text
+18. notes
+etc text for notes
