@@ -160,3 +160,18 @@ see votes.csv in /manual_sample_data/
 tabulation complete
 see: guide, for votes.txt to interpret votes.csv
 end: 2:05 PM (05/08/2023)
+start: 8:45 PM (05/11/2023)
+sometime yesterday I put about two hours into working on the R analysis of the sample data for 111-137-1 vote data
+here are some next necessary steps in order to get data of all the votes:
+rewrite search data by conducting the search again
+use detailed search data for bill association only
+then, fetch PDFs of reports with bills associated
+the following information will already be able to be associated with the report:
+congress #
+report # and part #
+associated bill #, type, and title
+rewrite information2.js to do the following:
+change the output of the format of the search results from being tiered by congress to be entirely linear
+re-fetch results on all reports, but don't do any backtracing to copy data from previous results
+running new program now, awaiting completion in ~800 minutes
+end: 11:15 PM (05/11/2023)

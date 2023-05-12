@@ -114,38 +114,31 @@ let house_committees = [
 async function foo() {
     let simple_search_results = await fs.readFileSync( "simple_search_results.json", "utf8", ( err ) => {} );
     simple_search_results = JSON.parse( simple_search_results );
+    // reformatting the structure of the search results
+    let new_ssr = [];
     for( let i = 0; i < simple_search_results.length; i++ ) {
-        console.log( `Processing simple results for Congress ${ simple_search_results[ i ][ 0 ].congress }` );
         for( let j = 0; j < simple_search_results[ i ].length; j++ ) {
-            let data;
-            // searches are only possible for a report on the whole, so copy
-            // data from previous reports for a report which has multiple parts
-            if( simple_search_results[ i ].length - 1 != j 
-                  &&  simple_search_results[ i ][ j ].part > 1 ) {
-                console.log( `Adding additional part...` );
-                data = simple_search_results[ i ][ j - 1 ];
-                data.part++;
-                data = JSON.stringify( data );
-            } else {
-                await new Promise( r => setTimeout( r, 4000 ) ); // 4 second wait time between API calls
-                console.log( `Fetching report ${ simple_search_results[ i ][ j ].number }, ${ simple_search_results[ i ].length - j - 1 } remaining...` );
-                try { // in the event of connection errors, implemented because a timeout occurred
-                    data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
-                } catch ( error ) {
-                    await new Promise( r => setTimeout( r, 60000 ) ); // wait one minute and try again
-                    data = await fetch( `https://api.congress.gov/v3/committee-report/${ simple_search_results[ i ][ j ].congress }/HRPT/${ simple_search_results[ i ][ j ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
-                }
-                data = await data.text();
-                try { // in long-term runs, an error can occur where HTML is sent instead of JSON
-                    simple_search_results[ i ][ j ] = JSON.parse( data ).committeeReports[ 0 ];
-                } catch ( error ) { // if this happens, try the whole request again
-                    j--;
-                }
-            }
+            new_ssr.push( simple_search_results[ i ][ j ] );
+        }
+    }
+    let api_call_delay = 3900; // 3.9 second wait time between API calls
+    let detailed_search_results = [];
+    for( let i = 0; i < new_ssr.length; i++ ) {
+        let data;
+        await new Promise( r => setTimeout( r, api_call_delay ) );
+        console.log( `Fetching item ${ i + 1 } of ${ new_ssr.length }, ${ ( ( i + 1 ) / new_ssr.length * 100 ).toFixed( 4 ) }%, est. time remaining ${ ( ( new Date( Date.now() + ( api_call_delay + 50 ) * ( new_ssr.length - i - 1 ) ) - new Date( Date.now() ) ) / ( 1000 * 60 ) ).toFixed( 2 ) } minutes` );
+        try { // in the event of connection errors, implemented because a timeout occurred
+            data = await fetch( `https://api.congress.gov/v3/committee-report/${ new_ssr[ i ].congress }/HRPT/${ new_ssr[ i ].number }?format=json&api_key=${ process.env.USER_TOKEN }` );
+            data = await data.text();
+            new_ssr[ i ] = JSON.parse( data ).committeeReports[ 0 ];
+        } catch ( error ) {
+            await new Promise( r => setTimeout( r, 30000 ) ); // wait 30 seconds and reset the loop
+            j--;
+            continue;
         }
     }
     console.log( `Search complete. Writing results to file...` );
-    fs.writeFile( "detailed_search_results.json", JSON.stringify( simple_search_results ), "utf8", ( err ) => {} );
+    fs.writeFile( "detailed_search_results.json", JSON.stringify( new_ssr ), "utf8", ( err ) => {} );
 }
 
 foo();
