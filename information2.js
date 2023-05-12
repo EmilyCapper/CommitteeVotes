@@ -133,7 +133,7 @@ async function foo() {
             new_ssr[ i ] = JSON.parse( data ).committeeReports[ 0 ];
         } catch ( error ) {
             await new Promise( r => setTimeout( r, 30000 ) ); // wait 30 seconds and reset the loop
-            j--;
+            i--;
             continue;
         }
     }
